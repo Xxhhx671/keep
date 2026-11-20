@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KEEP — IT-услуги</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&subset=cyrillic&display=swap" rel="stylesheet">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 --bg:#f3f5f4;--fg:#101513;--mut:#5b6661;--card:#fff;--acc:#10a63a;--line:#dfe5e2}
@@ -12,7 +12,7 @@
 :root[data-theme="dark"]{--bg:#0b0f0d;--fg:#eef3f0;--mut:#93a09a;--card:#151b18;--acc:#2ee06a;--line:#242d29}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
 header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
 .logo{font-weight:900;font-size:26px;letter-spacing:4px}
 .logo b{color:var(--acc)}
@@ -399,6 +399,43 @@ button,input,textarea,select{font-family:inherit}
 @keyframes dd{0%,80%,100%{opacity:.2}40%{opacity:1}}
 .lbl{display:block;font-size:12px;color:var(--mut);margin:4px 0 -4px}
 .mf textarea{resize:vertical}
+
+.chat-open{display:flex;align-items:center;gap:12px;width:100%;margin:18px 0 6px;padding:14px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer;text-align:left;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 45%,rgba(255,255,255,.1));-webkit-backdrop-filter:blur(14px) saturate(170%);backdrop-filter:blur(14px) saturate(170%);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),inset 0 -1px 1px rgba(255,255,255,.12),0 10px 26px rgba(0,0,0,.35);transition:transform .2s}
+.chat-open:active{transform:scale(.98)}.chat-open span{flex:1}
+.chat-open svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.chat-open svg:last-child{width:18px;opacity:.6}
+.chat-open b{min-width:24px;height:24px;padding:0 7px;border-radius:999px;display:grid;place-items:center;background:#fff;color:#050505;font-size:12px}
+#chatv{position:fixed;left:0;right:0;top:0;height:100dvh;z-index:130;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);animation:fd .25s}
+#chatv.out{opacity:0;transition:opacity .2s}
+.cv{position:relative;display:flex;flex-direction:column;width:min(560px,100%);height:min(780px,100%);border-radius:32px;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,rgba(34,34,34,.9),rgba(14,14,14,.94));-webkit-backdrop-filter:blur(30px) saturate(150%);backdrop-filter:blur(30px) saturate(150%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.07),0 40px 90px rgba(0,0,0,.7);animation:pop .4s cubic-bezier(.2,.9,.3,1.15)}
+.cv::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ch-h{display:flex;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) 14px 12px;margin:10px 10px 0;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 50%,rgba(255,255,255,.1));-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 1px 1px rgba(255,255,255,.55),inset 0 -1px 1px rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.35)}
+.ch-t{min-width:0;display:flex;flex-direction:column;gap:2px}.ch-t b{font-size:16px}.ch-t span{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-ib,.ch-s{flex:0 0 44px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:0;cursor:pointer;color:#fff;background:linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05) 55%,rgba(255,255,255,.12));box-shadow:inset 0 1px 1px rgba(255,255,255,.55),inset 0 -1px 1px rgba(255,255,255,.12);transition:transform .2s,opacity .2s,background .2s;-webkit-tap-highlight-color:transparent}
+.ch-ib svg,.ch-s svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ch-ib:active,.ch-s:active{transform:scale(.92)}
+.ch-s{background:#fff;color:#050505;box-shadow:0 6px 18px rgba(255,255,255,.18)}.ch-s:disabled{opacity:.3;box-shadow:none;cursor:default}
+.ch-l{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:3px;padding:16px 14px 8px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
+.ch-d{align-self:center;margin:12px 0 8px;padding:5px 12px;border-radius:999px;font-size:12px;color:var(--mut);background:rgba(255,255,255,.07)}
+.msg{position:relative;max-width:82%;padding:10px 14px 8px;border-radius:20px;font-size:15px;line-height:1.42;word-break:break-word;margin-top:8px;animation:msgIn .32s cubic-bezier(.2,.9,.3,1.1)}
+.msg.cont{margin-top:0}
+.msg i{display:block;font-style:normal;font-size:12px;font-weight:700;opacity:.55;margin-bottom:3px}
+.msg small{display:block;text-align:right;font-size:11px;opacity:.5;margin-top:3px}
+.msg a{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600}.msg a svg{width:20px;height:20px;flex:0 0 20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linejoin:round}
+.msg.me{align-self:flex-end;border-bottom-right-radius:7px;background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(255,255,255,.1) 55%,rgba(255,255,255,.2));-webkit-backdrop-filter:blur(10px) saturate(170%);backdrop-filter:blur(10px) saturate(170%);box-shadow:inset 0 1px 1px rgba(255,255,255,.65),inset 0 -1px 1px rgba(255,255,255,.18),0 8px 20px rgba(0,0,0,.3)}
+.msg.them{align-self:flex-start;border-bottom-left-radius:7px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+.msg.me.cont{border-top-right-radius:7px}.msg.them.cont{border-top-left-radius:7px}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.96)}}
+.ch-e{margin:auto;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mut);font-size:14px}.ch-e svg{width:44px;height:44px;stroke:currentColor;fill:none;stroke-width:1.3;stroke-linejoin:round}
+.ch-q{display:flex;gap:8px;overflow-x:auto;padding:4px 14px 8px;scrollbar-width:none}.ch-q::-webkit-scrollbar{display:none}
+.ch-q button{flex:0 0 auto;max-width:78%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:9px 14px;border-radius:999px;border:0;color:#fff;font:inherit;font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 55%,rgba(255,255,255,.1));box-shadow:inset 0 1px 1px rgba(255,255,255,.45)}
+.ch-f{display:flex;align-items:flex-end;gap:8px;margin:0 10px 10px;padding:8px;border-radius:30px;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 50%,rgba(255,255,255,.09));-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 1px 1px rgba(255,255,255,.5),inset 0 -1px 1px rgba(255,255,255,.1),0 10px 28px rgba(0,0,0,.4);margin-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.ch-f textarea{flex:1;min-width:0;height:44px;max-height:120px;padding:11px 8px;border:0;outline:0;resize:none;background:transparent;color:#fff;font:inherit;font-size:16px;line-height:22px}
+.ch-f textarea::placeholder{color:rgba(255,255,255,.4)}
+@media (max-width:640px){#chatv{padding:0;background:#000}.cv{width:100%;height:100%;border-radius:0;animation:slideUp .38s cubic-bezier(.2,.8,.2,1)}.msg{max-width:86%}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}}
+body{font-feature-settings:"cv11","ss03";-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
 </style>
 </head>
 <body>
@@ -411,15 +448,15 @@ button,input,textarea,select{font-family:inherit}
 <main class="wrap">
 <h2 class="h2 rv" id="what" data-n="01 — Услуги">Что мы делаем</h2>
 <div class="rv">
-<div class="rw"><span>01</span><h3>Сайт</h3><p>Лендинги, корпоративные сайты и интернет-магазины.</p><em>от 7 дней</em></div>
-<div class="rw"><span>02</span><h3>Приложение</h3><p>Мобильные приложения для iOS и Android.</p><em>от 30 дней</em></div>
-<div class="rw"><span>03</span><h3>Веб-приложение</h3><p>Личные кабинеты, CRM и сервисы в браузере.</p><em>от 21 дня</em></div>
+<div class="rw"><span>01</span><h3>Сайт</h3><p>Лендинги, корпоративные сайты и интернет-магазины.</p><em>3–10 дней</em></div>
+<div class="rw"><span>02</span><h3>Приложение</h3><p>Мобильные приложения для iOS и Android.</p><em>3–10 дней</em></div>
+<div class="rw"><span>03</span><h3>Веб-приложение</h3><p>Личные кабинеты, CRM и сервисы в браузере.</p><em>3–10 дней</em></div>
 </div>
-<div class="glass rv stats2" style="margin-top:80px"><div><b data-n="120">0</b><i>+</i><p>проектов</p></div><div><b data-n="8">0</b><i>лет</i><p>на рынке</p></div><div><b data-n="98">0</b><i>%</i><p>возвращаются</p></div></div>
+<div class="glass rv stats2" style="margin-top:80px"><div><b data-n="3">0</b><i>+</i><p>проектов</p></div><div><b data-n="2">0</b><i>года</i><p>на рынке</p></div><div><b data-n="70">0</b><i>%</i><p>возвращаются</p></div></div>
 <h2 class="h2 rv" id="process" data-n="02 — Процесс">Как мы работаем</h2>
 <div class="tl rv"><div class="st"><span>01</span><h3>Анализ</h3><p>Разбираем задачу и цели бизнеса.</p></div><div class="st"><span>02</span><h3>Дизайн</h3><p>Рисуем интерфейс и согласуем прототип.</p></div><div class="st"><span>03</span><h3>Разработка</h3><p>Пишем чистый код, тестируем этапы.</p></div><div class="st"><span>04</span><h3>Запуск</h3><p>Публикуем и остаёмся на связи.</p></div></div>
 <h2 class="h2 rv" id="faq" data-n="03 — Вопросы">Частые вопросы</h2>
-<div class="rv fq"><details><summary>Сколько стоит разработка?</summary><p>Стоимость зависит от задач и объёма работ. После короткого обсуждения мы бесплатно рассчитаем бюджет и покажем, из чего он складывается.</p></details><details><summary>Как быстро вы запускаете проект?</summary><p>Сайт — от 7 дней, веб-приложение — от 21 дня, мобильное приложение — от 30 дней. Точный срок назовём после анализа задачи.</p></details><details><summary>Остаётесь ли вы после запуска?</summary><p>Да. Мы поддерживаем проект: исправляем ошибки, обновляем и развиваем функциональность по мере роста бизнеса.</p></details><details><summary>Что нужно, чтобы начать?</summary><p>Достаточно рассказать идею, привести примеры, которые нравятся, и назвать желаемые сроки. Всё остальное мы уточним сами.</p></details></div>
+<div class="rv fq"><details><summary>Сколько стоит разработка?</summary><p>Стоимость зависит от задач и объёма работ. После короткого обсуждения мы бесплатно рассчитаем бюджет и покажем, из чего он складывается.</p></details><details><summary>Как быстро вы запускаете проект?</summary><p>Любой проект — от 3 до 10 дней. Точный срок назовём после анализа задачи.</p></details><details><summary>Остаётесь ли вы после запуска?</summary><p>Да. Мы поддерживаем проект: исправляем ошибки, обновляем и развиваем функциональность по мере роста бизнеса.</p></details><details><summary>Что нужно, чтобы начать?</summary><p>Достаточно рассказать идею, привести примеры, которые нравятся, и назвать желаемые сроки. Всё остальное мы уточним сами.</p></details></div>
 </main>
 <div class="mq"><div><span>САЙТЫ</span><span>ПРИЛОЖЕНИЯ</span><span>ВЕБ-СЕРВИСЫ</span><span>САЙТЫ</span><span>ПРИЛОЖЕНИЯ</span><span>ВЕБ-СЕРВИСЫ</span></div></div>
 <main class="wrap" id="contact"><div class="ct"><div class="rv"><h2 class="h2" style="margin-top:0" data-n="04 — Контакты">Начнём<br>проект?</h2><a class="ml" href="mailto:keep.it.official.001@gmail.com">keep.it.official.001@gmail.com</a></div>
@@ -446,9 +483,9 @@ button,input,textarea,select{font-family:inherit}
 </nav>
 <script>
 let DT=[
-{n:"Сайт",t:"7–21 день",l:"Создаём сайты, которые быстро загружаются, хорошо выглядят на любом экране и приводят клиентов. Подходят для презентации бизнеса, продаж и сбора заявок.",p:[["Уникальный дизайн","Интерфейс под ваш бренд, а не шаблон"],["Адаптивная вёрстка","Телефон, планшет и компьютер"],["SEO и скорость","Быстрая загрузка и видимость в поиске"],["Формы и аналитика","Заявки, метрики, подключение домена"],["Управление контентом","Простая панель для правок без программиста"],["Безопасность","HTTPS, защита форм и резервные копии"]],k:["HTML","CSS","JavaScript","React","WordPress"]},
-{n:"Приложение",t:"30–90 дней",l:"Разрабатываем мобильные приложения для iOS и Android: от прототипа и дизайна до публикации в магазинах и дальнейшей поддержки.",p:[["Прототип и дизайн","Сценарии пользователя и живой интерфейс"],["iOS и Android","Одно решение для обеих платформ"],["Аккаунты и оплата","Авторизация, подписки, платежи"],["Push-уведомления","Возвращайте пользователей вовремя"],["Публикация","App Store и Google Play под ключ"],["Поддержка","Обновления и исправления после релиза"]],k:["Swift","Kotlin","Flutter","React Native","Firebase"]},
-{n:"Веб-приложение",t:"21–60 дней",l:"Строим сервисы, которые работают прямо в браузере: личные кабинеты, CRM, панели управления и внутренние системы, способные расти вместе с бизнесом.",p:[["Личные кабинеты","Роли, права доступа, вход по почте"],["CRM и дашборды","Данные и отчёты в одном месте"],["Интеграции","Платежи, почта, внешние API"],["Безопасность","Шифрование и резервное копирование"],["Масштабирование","Выдержит рост нагрузки и команды"],["Облачный запуск","Развёртывание и мониторинг"]],k:["React","Node.js","Python","PostgreSQL","Docker"]}];
+{n:"Сайт",t:"3–10 дней",l:"Создаём сайты, которые быстро загружаются, хорошо выглядят на любом экране и приводят клиентов. Подходят для презентации бизнеса, продаж и сбора заявок.",p:[["Уникальный дизайн","Интерфейс под ваш бренд, а не шаблон"],["Адаптивная вёрстка","Телефон, планшет и компьютер"],["SEO и скорость","Быстрая загрузка и видимость в поиске"],["Формы и аналитика","Заявки, метрики, подключение домена"],["Управление контентом","Простая панель для правок без программиста"],["Безопасность","HTTPS, защита форм и резервные копии"]],k:["HTML","CSS","JavaScript","React","WordPress"]},
+{n:"Приложение",t:"3–10 дней",l:"Разрабатываем мобильные приложения для iOS и Android: от прототипа и дизайна до публикации в магазинах и дальнейшей поддержки.",p:[["Прототип и дизайн","Сценарии пользователя и живой интерфейс"],["iOS и Android","Одно решение для обеих платформ"],["Аккаунты и оплата","Авторизация, подписки, платежи"],["Push-уведомления","Возвращайте пользователей вовремя"],["Публикация","App Store и Google Play под ключ"],["Поддержка","Обновления и исправления после релиза"]],k:["Swift","Kotlin","Flutter","React Native","Firebase"]},
+{n:"Веб-приложение",t:"3–10 дней",l:"Строим сервисы, которые работают прямо в браузере: личные кабинеты, CRM, панели управления и внутренние системы, способные расти вместе с бизнесом.",p:[["Личные кабинеты","Роли, права доступа, вход по почте"],["CRM и дашборды","Данные и отчёты в одном месте"],["Интеграции","Платежи, почта, внешние API"],["Безопасность","Шифрование и резервное копирование"],["Масштабирование","Выдержит рост нагрузки и команды"],["Облачный запуск","Развёртывание и мониторинг"]],k:["React","Node.js","Python","PostgreSQL","Docker"]}];
 const CK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const THINK_PHRASES=[
   ['Анализирую задачу…','Подбираю стек под ваши цели…','Оцениваю сроки и риски…','Формирую описание решения…'],
@@ -498,7 +535,7 @@ async function contentEditor(body){
   const f=(i,k,l,v)=>'<label class="lbl">'+l+'</label><input data-f="'+k+'" value="'+esc(v)+'">';
   const ta=(k,l,v,r)=>'<label class="lbl">'+l+'</label><textarea data-f="'+k+'" rows="'+r+'">'+esc(v)+'</textarea>';
   body.innerHTML='<div class="cardx"><h3>Контент сайта</h3><p class="ms">Названия, сроки и описания услуг. Главная и карточки берут данные отсюда.</p></div>'+c.map((x,i)=>'<div class="cardx" style="margin-top:12px" data-i="'+i+'"><h3>'+esc(x.n)+'</h3><div class="mf">'+
-    f(i,'n','Название',x.n)+f(i,'from','Срок в списке «Что мы делаем» (например: от 7 дней)',x.from)+f(i,'rd','Описание в списке',x.rd)+f(i,'t','Срок в карточке (например: 7–21 день)',x.t)+
+    f(i,'n','Название',x.n)+f(i,'from','Срок в списке «Что мы делаем» (например: 3–10 дней)',x.from)+f(i,'rd','Описание в списке',x.rd)+f(i,'t','Срок в карточке (например: 7–21 день)',x.t)+
     ta('l','Описание в карточке',x.l,4)+ta('p','Что входит: по строке «Заголовок | подпись»',x.p.map(a=>a.join(' | ')).join('\n'),6)+f(i,'k','Технологии через запятую',x.k.join(', '))+'</div></div>').join('')+
     '<button class="send" id="saveCt" type="button" style="margin-top:12px">Сохранить</button>';
   $('#saveCt').onclick=async()=>{
@@ -584,6 +621,63 @@ function ocCard(o,admin){
   return '<div class="oc" data-id="'+o.id+'" style="cursor:pointer'+(unread?';border-color:rgba(255,255,255,.35)':'')+'"><div class="oh"><b>'+esc(o.service)+(o.priority?' <svg class="ico-inline" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-14h-7l0-6z" fill="currentColor" stroke="none"/></svg>':'')+(o.discount?' −'+o.discount+'%':'')+'</b><span class="stt s-'+o.status+'">'+ST[o.status]+'</span></div><p>'+esc(o.message).slice(0,140)+(o.message.length>140?'…':'')+'</p><small>№'+o.id+' · '+dt+(admin?' · '+esc(o.name):'')+(unread?' · <b>новое</b>':'')+'</small></div>';
 }
 
+const IC={
+  chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4V5z"/></svg>',
+  chev:'<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>',
+  clip:'<svg viewBox="0 0 24 24"><path d="M20 11l-8.5 8.5a5 5 0 01-7-7L13 4a3.5 3.5 0 015 5l-8.5 8.5a2 2 0 01-3-3L14 7"/></svg>',
+  send:'<svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  file:'<svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6V3zM14 3v4h4"/></svg>'
+};
+function openChat(o,id){
+  document.getElementById('chatv')?.remove();
+  const v=document.createElement('div');v.id='chatv';
+  v.innerHTML='<div class="cv"><div class="ch-h"><button class="ch-ib" id="chBack" type="button" aria-label="Назад">'+IC.back+'</button><div class="ch-t"><b>Заявка №'+o.id+'</b><span>'+esc(o.service)+' · '+ST[o.status]+'</span></div></div>'+
+    '<div class="ch-l" id="chL"></div><div class="ch-q" id="chQ"></div>'+
+    '<div class="ch-f"><label class="ch-ib" aria-label="Прикрепить">'+IC.clip+'<input type="file" id="cupf" hidden accept="image/*,.pdf,.txt,.doc,.docx"></label><textarea id="cmt" rows="1" placeholder="Сообщение"></textarea><button class="ch-s" id="sendC" type="button" aria-label="Отправить" disabled>'+IC.send+'</button></div></div>';
+  document.body.appendChild(v);
+  const L=$('#chL'),T=$('#cmt'),S=$('#sendC');let lastBy=null,lastDay='',n=(o.comments||[]).length;
+  const tm=d=>new Date(d).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  const dl=d=>new Date(d).toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+  const bottom=()=>L.scrollTo({top:L.scrollHeight,behavior:'smooth'});
+  function add(c,fast){
+    const day=dl(c.at),mine=c.by===ME.id;let h='';
+    if(day!==lastDay){h+='<div class="ch-d">'+day+'</div>';lastDay=day}
+    h+='<div class="msg '+(mine?'me':'them')+(c.by===lastBy?' cont':'')+'">'+(!mine&&c.by!==lastBy?'<i>'+esc(c.byName)+'</i>':'')+(c.file?'<a href="'+esc(c.file.url)+'" target="_blank" rel="noopener">'+IC.file+esc(c.file.name)+'</a>':esc(c.text))+'<small>'+tm(c.at)+'</small></div>';
+    lastBy=c.by;L.insertAdjacentHTML('beforeend',h);if(!fast)bottom();
+  }
+  if(n)(o.comments||[]).forEach(c=>add(c,true));else L.innerHTML='<p class="ch-e">'+IC.chat+'<span>Сообщений пока нет</span></p>';
+  L.scrollTop=L.scrollHeight;
+  const qr=openChat._q=openOrderDetail._qr||[];
+  $('#chQ').innerHTML=qr.map((t,i)=>'<button type="button" data-qr="'+i+'">'+esc(t)+'</button>').join('');
+  if(!qr.length)$('#chQ').remove();
+  const fit=()=>{const vv=window.visualViewport;if(!vv)return;v.style.height=vv.height+'px';v.style.top=vv.offsetTop+'px';L.scrollTop=L.scrollHeight};
+  window.visualViewport&&(visualViewport.addEventListener('resize',fit),visualViewport.addEventListener('scroll',fit));fit();
+  const close=()=>{window.visualViewport&&(visualViewport.removeEventListener('resize',fit),visualViewport.removeEventListener('scroll',fit));v.classList.add('out');setTimeout(()=>v.remove(),220);document.removeEventListener('keydown',esc2)};
+  const esc2=e=>{if(e.key==='Escape'){e.stopPropagation();close()}};document.addEventListener('keydown',esc2);
+  $('#chBack').onclick=close;
+  const grow=()=>{T.style.height='auto';T.style.height=Math.min(T.scrollHeight,120)+'px';S.disabled=!T.value.trim()};
+  T.oninput=grow;
+  T.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&matchMedia('(hover:hover)').matches){e.preventDefault();S.click()}};
+  const bump=()=>{n++;const b=$('#chCnt');if(b)b.textContent=n;$('.ch-e')?.remove()};
+  S.onclick=async()=>{
+    const t=T.value.trim();if(!t)return;S.disabled=true;
+    try{const r=await api('/orders/'+id+'/comments',{method:'POST',body:{text:t}});bump();add(r.comment);T.value='';grow()}
+    catch(e){toast(e.message);S.disabled=false}
+  };
+  v.querySelectorAll('[data-qr]').forEach(b=>b.onclick=()=>{T.value=qr[+b.dataset.qr]||'';grow();T.focus()});
+  $('#cupf').onchange=async e=>{
+    const file=e.target.files[0];if(!file)return;
+    if(file.size>5*1024*1024)return toast('Макс. 5 МБ');
+    const rd=new FileReader();
+    rd.onload=async()=>{try{
+      const r=await api('/orders/'+id+'/files',{method:'POST',body:{name:file.name,data:rd.result,type:file.type}});
+      const fls=$('#fls');if(fls)fls.insertAdjacentHTML('beforeend','<a href="'+esc(r.file.url)+'" target="_blank">'+esc(r.file.name)+'</a>');
+      bump();add({by:ME.id,byName:ME.name,at:new Date().toISOString(),file:r.file});toast('Файл загружен')
+    }catch(x){toast(x.message)}};
+    rd.readAsDataURL(file);
+  };
+}
 async function openOrderDetail(id){
   try{
     const r=await api('/orders/'+id);const o=r.order;const admin=isStaff();
@@ -599,7 +693,7 @@ async function openOrderDetail(id){
     if(canWrite()){
       statusSel='<label class="ms">Статус</label><select id="stSel">'+Object.keys(ST).map(k=>'<option value="'+k+'"'+(k===o.status?' selected':'')+'>'+ST[k]+'</option>').join('')+'</select>';
     }
-    let quick='';
+    let quick='';openOrderDetail._qr=[];
     if(canWrite()){
       try{
         const qr=await api('/admin/quick-replies');
@@ -611,34 +705,9 @@ async function openOrderDetail(id){
       (admin?'<p class="ms">'+esc(o.name)+' · '+esc(o.email)+'</p>':'')+
       '<h4 style="margin:16px 0 6px;font-size:14px">История</h4>'+hist+
       '<h4 style="margin:16px 0 6px;font-size:14px">Файлы</h4><div class="file-list" id="fls">'+files+'</div>'+
-      '<label class="ghb" style="display:inline-block;padding:10px 14px;margin:6px 0;cursor:pointer">Прикрепить<input type="file" id="upf" hidden accept="image/*,.pdf,.txt,.doc,.docx"></label>'+
-      '<h4 style="margin:16px 0 6px;font-size:14px">Переписка</h4><div class="chat" id="chat">'+chat+'</div>'+quick+
-      '<div class="mf" style="margin-top:8px"><textarea id="cmt" rows="2" placeholder="Сообщение…"></textarea><button class="send" id="sendC" type="button">Отправить</button></div>'+
+      '<button class="chat-open" id="openChat" type="button">'+IC.chat+'<span>Открыть чат</span><b id="chCnt">'+(o.comments||[]).length+'</b>'+IC.chev+'</button>'+
       statusSel+rate);
-    const up=$('#upf');
-    if(up)up.onchange=async()=>{
-      const file=up.files[0];if(!file)return;
-      if(file.size>5*1024*1024)return toast('Макс. 5 МБ');
-      const reader=new FileReader();
-      reader.onload=async()=>{
-        try{
-          const r=await api('/orders/'+id+'/files',{method:'POST',body:{name:file.name,data:reader.result,type:file.type}});
-          const fls=$('#fls');fls.innerHTML+=(fls.innerHTML?'':'')+'<a href="'+esc(r.file.url)+'" target="_blank">'+esc(r.file.name)+'</a>';
-          toast('Файл загружен');
-        }catch(e){toast(e.message)}
-      };
-      reader.readAsDataURL(file);
-    };
-    $('#sendC').onclick=async()=>{
-      const t=$('#cmt').value.trim();if(!t)return;
-      try{
-        const r=await api('/orders/'+id+'/comments',{method:'POST',body:{text:t}});
-        const c=r.comment;
-        $('#chat').insertAdjacentHTML('beforeend','<div class="bubble me">'+esc(c.text)+'<small>'+esc(c.byName)+' · сейчас</small></div>');
-        $('#cmt').value='';
-      }catch(e){toast(e.message)}
-    };
-    $$('[data-qr]').forEach(b=>b.onclick=()=>{$('#cmt').value=openOrderDetail._qr[+b.dataset.qr]||''});
+    $('#openChat').onclick=()=>openChat(o,id);
     const stSel=$('#stSel');
     if(stSel)stSel.onchange=async()=>{
       try{await api('/admin/orders/'+id,{method:'PATCH',body:{status:stSel.value}});toast('Статус: '+ST[stSel.value]);refreshNotif()}catch(e){toast(e.message)}
