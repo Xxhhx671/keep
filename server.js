@@ -42,9 +42,11 @@ const QUICK_REPLIES = [
   'Спасибо за оценку! Будем рады помочь снова.'
 ];
 
+const DEFAULT_CONTENT = [{"n": "Сайт", "t": "7–21 день", "l": "Создаём сайты, которые быстро загружаются, хорошо выглядят на любом экране и приводят клиентов. Подходят для презентации бизнеса, продаж и сбора заявок.", "p": [["Уникальный дизайн", "Интерфейс под ваш бренд, а не шаблон"], ["Адаптивная вёрстка", "Телефон, планшет и компьютер"], ["SEO и скорость", "Быстрая загрузка и видимость в поиске"], ["Формы и аналитика", "Заявки, метрики, подключение домена"], ["Управление контентом", "Простая панель для правок без программиста"], ["Безопасность", "HTTPS, защита форм и резервные копии"]], "k": ["HTML", "CSS", "JavaScript", "React", "WordPress"], "rd": "Лендинги, корпоративные сайты и интернет-магазины.", "from": "от 7 дней"}, {"n": "Приложение", "t": "30–90 дней", "l": "Разрабатываем мобильные приложения для iOS и Android: от прототипа и дизайна до публикации в магазинах и дальнейшей поддержки.", "p": [["Прототип и дизайн", "Сценарии пользователя и живой интерфейс"], ["iOS и Android", "Одно решение для обеих платформ"], ["Аккаунты и оплата", "Авторизация, подписки, платежи"], ["Push-уведомления", "Возвращайте пользователей вовремя"], ["Публикация", "App Store и Google Play под ключ"], ["Поддержка", "Обновления и исправления после релиза"]], "k": ["Swift", "Kotlin", "Flutter", "React Native", "Firebase"], "rd": "Мобильные приложения для iOS и Android.", "from": "от 30 дней"}, {"n": "Веб-приложение", "t": "21–60 дней", "l": "Строим сервисы, которые работают прямо в браузере: личные кабинеты, CRM, панели управления и внутренние системы, способные расти вместе с бизнесом.", "p": [["Личные кабинеты", "Роли, права доступа, вход по почте"], ["CRM и дашборды", "Данные и отчёты в одном месте"], ["Интеграции", "Платежи, почта, внешние API"], ["Безопасность", "Шифрование и резервное копирование"], ["Масштабирование", "Выдержит рост нагрузки и команды"], ["Облачный запуск", "Развёртывание и мониторинг"]], "k": ["React", "Node.js", "Python", "PostgreSQL", "Docker"], "rd": "Личные кабинеты, CRM и сервисы в браузере.", "from": "от 21 дня"}];
+
 // ========== DB ==========
 let DB = {
-  users: [], sessions: [], orders: [], services: [], promos: {},
+  users: [], sessions: [], orders: [], services: [], content: [], promos: {},
   logs: [], seq: { users: 0, orders: 0, comments: 0, files: 0 }
 };
 
@@ -58,6 +60,7 @@ function loadDB() {
       sessions: j.sessions || [],
       orders: j.orders || [],
       services: j.services && j.services.length ? j.services : DEFAULT_SERVICES.slice(),
+      content: Array.isArray(j.content) && j.content.length ? j.content : JSON.parse(JSON.stringify(DEFAULT_CONTENT)),
       promos: j.promos && Object.keys(j.promos).length ? j.promos : { ...DEFAULT_PROMOS },
       logs: j.logs || [],
       seq: j.seq || { users: 0, orders: 0, comments: 0, files: 0 }
@@ -65,6 +68,7 @@ function loadDB() {
     ['users','orders','comments','files'].forEach(k => { if (typeof DB.seq[k] !== 'number') DB.seq[k] = 0; });
   } catch {
     DB.services = DEFAULT_SERVICES.slice();
+    DB.content = JSON.parse(JSON.stringify(DEFAULT_CONTENT));
     DB.promos = { ...DEFAULT_PROMOS };
     saveDB();
   }
@@ -408,6 +412,33 @@ app.post('/api/promo', needAuth, limiter(10, 15 * 60 * 1000), (req, res) => {
   saveDB();
   logAction(u.id, 'promo', { code });
   res.json({ user: pubUser(u), message: 'Промокод активирован: ' + (promo.label || code), promo: u.activePromo });
+});
+
+// ----- site content (public read, admin edit) -----
+app.get('/api/content', (req, res) => res.json({ content: DB.content }));
+
+app.put('/api/admin/content', needAuth, needAdmin, (req, res) => {
+  const inc = req.body.content;
+  if (!Array.isArray(inc) || inc.length !== DB.content.length) return fail(res, 400, 'Неверный формат');
+  const out = [];
+  for (const x of inc) {
+    const n = clean(x.n, 40);
+    if (n.length < 2) return fail(res, 400, 'Название слишком короткое');
+    out.push({
+      n, from: clean(x.from, 40), rd: clean(x.rd, 200), t: clean(x.t, 40), l: clean(x.l, 800),
+      p: (Array.isArray(x.p) ? x.p : []).slice(0, 12).map(a => [clean(a && a[0], 60), clean(a && a[1], 120)]).filter(a => a[0]),
+      k: (Array.isArray(x.k) ? x.k : []).slice(0, 12).map(v => clean(v, 30)).filter(Boolean)
+    });
+  }
+  // переименование услуги в контенте = переименование в списке заявок
+  out.forEach((c, i) => {
+    const sv = DB.services.find(v => v.name === DB.content[i].n);
+    if (sv) sv.name = c.n;
+  });
+  DB.content = out;
+  saveDB();
+  logAction(req.user.id, 'content_edit', null);
+  res.json({ content: DB.content });
 });
 
 // ----- services (public list + admin CRUD) -----
