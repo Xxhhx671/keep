@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KEEP — IT-услуги</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 --bg:#f3f5f4;--fg:#101513;--mut:#5b6661;--card:#fff;--acc:#10a63a;--line:#dfe5e2}
@@ -11,7 +12,7 @@
 :root[data-theme="dark"]{--bg:#0b0f0d;--fg:#eef3f0;--mut:#93a09a;--card:#151b18;--acc:#2ee06a;--line:#242d29}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
 header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px}
 .logo{font-weight:900;font-size:26px;letter-spacing:4px}
 .logo b{color:var(--acc)}
@@ -387,6 +388,17 @@ body.hasnav{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .think-txt{transition:opacity .18s ease,transform .18s ease}
 .think-txt.o{opacity:0;transform:translateY(6px)}
 .think-box{animation:fi .35s ease-out}
+button,input,textarea,select{font-family:inherit}
+.think-box{gap:12px;font-size:16px;font-weight:600}
+.globe{width:34px;height:34px;flex:0 0 34px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round}
+.globe .mer{transform-origin:12px 12px;animation:mer 2.2s linear infinite}
+.globe .eq{animation:eq 2.2s ease-in-out infinite;transform-origin:12px 12px}
+@keyframes mer{to{transform:scaleX(-1)}}
+@keyframes eq{50%{transform:scaleY(.9)}}
+.dots i{font-style:normal;animation:dd 1.2s infinite both}.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes dd{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.lbl{display:block;font-size:12px;color:var(--mut);margin:4px 0 -4px}
+.mf textarea{resize:vertical}
 </style>
 </head>
 <body>
@@ -433,7 +445,7 @@ body.hasnav{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
   </button>
 </nav>
 <script>
-const DT=[
+let DT=[
 {n:"Сайт",t:"7–21 день",l:"Создаём сайты, которые быстро загружаются, хорошо выглядят на любом экране и приводят клиентов. Подходят для презентации бизнеса, продаж и сбора заявок.",p:[["Уникальный дизайн","Интерфейс под ваш бренд, а не шаблон"],["Адаптивная вёрстка","Телефон, планшет и компьютер"],["SEO и скорость","Быстрая загрузка и видимость в поиске"],["Формы и аналитика","Заявки, метрики, подключение домена"],["Управление контентом","Простая панель для правок без программиста"],["Безопасность","HTTPS, защита форм и резервные копии"]],k:["HTML","CSS","JavaScript","React","WordPress"]},
 {n:"Приложение",t:"30–90 дней",l:"Разрабатываем мобильные приложения для iOS и Android: от прототипа и дизайна до публикации в магазинах и дальнейшей поддержки.",p:[["Прототип и дизайн","Сценарии пользователя и живой интерфейс"],["iOS и Android","Одно решение для обеих платформ"],["Аккаунты и оплата","Авторизация, подписки, платежи"],["Push-уведомления","Возвращайте пользователей вовремя"],["Публикация","App Store и Google Play под ключ"],["Поддержка","Обновления и исправления после релиза"]],k:["Swift","Kotlin","Flutter","React Native","Firebase"]},
 {n:"Веб-приложение",t:"21–60 дней",l:"Строим сервисы, которые работают прямо в браузере: личные кабинеты, CRM, панели управления и внутренние системы, способные расти вместе с бизнесом.",p:[["Личные кабинеты","Роли, права доступа, вход по почте"],["CRM и дашборды","Данные и отчёты в одном месте"],["Интеграции","Платежи, почта, внешние API"],["Безопасность","Шифрование и резервное копирование"],["Масштабирование","Выдержит рост нагрузки и команды"],["Облачный запуск","Развёртывание и мониторинг"]],k:["React","Node.js","Python","PostgreSQL","Docker"]}];
@@ -455,15 +467,9 @@ function swapDt(html){
   },swapDt._k===1?0:200);
 }
 function render(i){
-  const phrases=THINK_PHRASES[i]||THINK_PHRASES[0],box=document.getElementById('dt');
-  let step=0;clearInterval(render._t);
-  swapDt('<div class="think-box"><div class="think-ico"></div><div class="think-txt">'+phrases[0]+'</div></div>');
-  render._t=setInterval(()=>{
-    step++;
-    if(step>=phrases.length){clearInterval(render._t);swapDt(finalHtml(i));return}
-    const t=box.querySelector('.think-txt');
-    if(t){t.classList.add('o');setTimeout(()=>{t.textContent=phrases[step];t.classList.remove('o')},180)}
-  },750);
+  clearInterval(render._t);clearTimeout(render._t2);
+  swapDt('<div class="think-box"><svg class="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path class="eq" d="M3 12h18"/><path class="mer" d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>Думаю<span class="dots"><i>.</i><i>.</i><i>.</i></span></span></div>');
+  render._t2=setTimeout(()=>swapDt(finalHtml(i)),1800);
 }
 /* ===== аккаунты, заявки, кабинет ===== */
 const SV=['Сайт','Приложение','Веб-приложение','Другое'];
@@ -476,6 +482,31 @@ const starRow=(n)=>[1,2,3,4,5].map(i=>starSvg(i<=n)).join('');
 const backLink=()=>'<a class="back" href="/"><svg class="ico-inline" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> На главную</a>';
 const xSvg=()=>'<svg class="ico-inline" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
+let CT=null;
+function applyContent(c){
+  c.forEach((x,i)=>{
+    if(!DT[i])return;
+    Object.assign(DT[i],{n:x.n,t:x.t,l:x.l,p:x.p,k:x.k});
+    const rw=$$('#view-home .rw')[i];
+    if(rw){rw.querySelector('h3').textContent=x.n;rw.querySelector('p').textContent=x.rd;rw.querySelector('em').textContent=x.from}
+    const nm=$$('#row .nm')[i];if(nm)nm.textContent=x.n;
+  });
+  if(document.querySelector('#dt .dbody')&&typeof cur!=='undefined'&&cur>=0)swapDt(finalHtml(cur));
+}
+async function contentEditor(body){
+  const c=(await api('/content')).content;
+  const f=(i,k,l,v)=>'<label class="lbl">'+l+'</label><input data-f="'+k+'" value="'+esc(v)+'">';
+  const ta=(k,l,v,r)=>'<label class="lbl">'+l+'</label><textarea data-f="'+k+'" rows="'+r+'">'+esc(v)+'</textarea>';
+  body.innerHTML='<div class="cardx"><h3>Контент сайта</h3><p class="ms">Названия, сроки и описания услуг. Главная и карточки берут данные отсюда.</p></div>'+c.map((x,i)=>'<div class="cardx" style="margin-top:12px" data-i="'+i+'"><h3>'+esc(x.n)+'</h3><div class="mf">'+
+    f(i,'n','Название',x.n)+f(i,'from','Срок в списке «Что мы делаем» (например: от 7 дней)',x.from)+f(i,'rd','Описание в списке',x.rd)+f(i,'t','Срок в карточке (например: 7–21 день)',x.t)+
+    ta('l','Описание в карточке',x.l,4)+ta('p','Что входит: по строке «Заголовок | подпись»',x.p.map(a=>a.join(' | ')).join('\n'),6)+f(i,'k','Технологии через запятую',x.k.join(', '))+'</div></div>').join('')+
+    '<button class="send" id="saveCt" type="button" style="margin-top:12px">Сохранить</button>';
+  $('#saveCt').onclick=async()=>{
+    const out=c.map((x,i)=>{const g=k=>body.querySelector('[data-i="'+i+'"] [data-f="'+k+'"]').value.trim();
+      return{n:g('n'),from:g('from'),rd:g('rd'),t:g('t'),l:g('l'),p:g('p').split('\n').map(s=>s.split('|').map(z=>z.trim())).filter(a=>a[0]).map(a=>[a[0],a[1]||'']),k:g('k').split(',').map(s=>s.trim()).filter(Boolean)}});
+    try{const r=await api('/admin/content',{method:'PUT',body:{content:out}});applyContent(r.content);toast('Сохранено')}catch(e){toast(e.message)}
+  };
+}
 const ST={new:'Новая',in_progress:'В работе',done:'Готово',cancelled:'Отменена'};
 const ROLE_L={user:'Пользователь',manager:'Менеджер',admin:'Админ',viewer:'Просмотр'};
 function toast(t){const e=$('#tt');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3400)}
@@ -640,7 +671,7 @@ async function renderCabinetPage(){
   const staff=isStaff();
   el.innerHTML=''+backLink()+''+
     '<div class="ch"><span class="av big">'+esc(ME.name[0].toUpperCase())+'</span><div><h1>'+esc(ME.name)+(staff?' <span class="role-badge">'+esc(ROLE_L[ME.role]||ME.role)+'</span>':'')+'</h1><p class="sub">'+esc(ME.email)+'</p></div></div>'+
-    (staff?'<div class="seg" id="cabSeg"><button type="button" data-t="mine" class="on">Мои</button><button type="button" data-t="all">Все заявки</button><button type="button" data-t="dash">Дашборд</button><button type="button" data-t="profile">Профиль</button></div>':
+    (staff?'<div class="seg" id="cabSeg"><button type="button" data-t="mine" class="on">Мои</button><button type="button" data-t="all">Все заявки</button><button type="button" data-t="dash">Дашборд</button>'+(ME.role==='admin'?'<button type="button" data-t="content">Контент</button>':'')+'<button type="button" data-t="profile">Профиль</button></div>':
       '<div class="seg" id="cabSeg"><button type="button" data-t="mine" class="on">Заявки</button><button type="button" data-t="profile">Профиль</button></div>')+
     '<div id="cabBody"><p class="ms">Загрузка…</p></div>';
   async function show(tab){
@@ -659,6 +690,7 @@ async function renderCabinetPage(){
       $('#lo').onclick=async()=>{try{await api('/auth/logout',{method:'POST'})}catch(e){}ME=null;authBtn();goPage('/');toast('Вы вышли')};
       return;
     }
+    if(tab==='content'&&ME.role==='admin'){try{await contentEditor(body)}catch(e){body.innerHTML='<p class="err">'+esc(e.message)+'</p>'}return}
     if(tab==='dash'&&staff){
       try{
         const d=await api('/admin/dashboard');
@@ -782,6 +814,7 @@ $$('#bnav button').forEach(b=>b.onclick=()=>{
   }
 });
 
+api('/content').then(r=>applyContent(r.content)).catch(()=>{});
 api('/auth/me').then(async r=>{ME=r.user;authBtn();await refreshNotif();route()}).catch(()=>{route()});
 
 const ics=[...document.querySelectorAll('.it')],bgs=[...document.querySelectorAll('.bg')];
