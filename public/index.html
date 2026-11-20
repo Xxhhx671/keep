@@ -305,10 +305,8 @@ html{scroll-behavior:smooth}::selection{background:#fff;color:#000}:focus-visibl
 .hist{font-size:12px;color:var(--mut);margin:6px 0}
 #main-site.hid{display:none}
 body.on-page .top .lk{display:none}
-body.on-page .hero3,
-body.on-page .stage,
-body.on-page section,
-body.on-page footer{display:none!important}
+body.on-page #view-home{display:none}
+body:not(.on-page) #view-home{animation:fi .45s ease-out}
 body.on-page .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
 
 
@@ -370,7 +368,7 @@ body.on-page .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}
 @keyframes icoPop{from{transform:scale(.6);opacity:0}to{transform:translateY(-2px) scale(1.08);opacity:1}}
 @keyframes drawIco{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
 @keyframes icoWiggle{0%,100%{transform:translateY(-2px) rotate(0)}30%{transform:translateY(-2px) rotate(-8deg)}60%{transform:translateY(-2px) rotate(8deg)}}
-body{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+body.hasnav{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .page{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 /* star svg */
 .star-ico{width:22px;height:22px;display:inline-block;vertical-align:middle}
@@ -379,13 +377,23 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 .stars span{display:inline-flex;opacity:1}
 .ico-inline{width:14px;height:14px;display:inline-block;vertical-align:-2px;margin:0 3px;stroke:currentColor;fill:none;stroke-width:2}
 
+
+.page.out,#view-home.out{opacity:0;transform:translateY(-10px);transition:opacity .2s ease,transform .2s ease}
+.bnav{transition:opacity .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.bnav.hide{opacity:0;pointer-events:none;transform:translate(-50%,28px)}
+#dt{transition:height .45s cubic-bezier(.2,.8,.2,1)}
+#dt>*{transition:opacity .2s ease,transform .2s ease}
+#dt.sw>*{opacity:0;transform:translateY(8px)}
+.think-txt{transition:opacity .18s ease,transform .18s ease}
+.think-txt.o{opacity:0;transform:translateY(6px)}
+.think-box{animation:fi .35s ease-out}
 </style>
 </head>
 <body>
 <canvas id="sq"></canvas><div id="pg"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="lg" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".007 .011" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <div class="top"><div class="ti"><div class="logo">KEEP</div><div class="lk"><a href="#what">Услуги</a><a href="#process">Процесс</a><a href="#faq">Вопросы</a><a href="#contact">Контакты</a></div><div class="rg"><button class="gb" id="au" type="button">Войти</button><a class="pill glass" href="#contact">Связаться</a></div></div></div>
-<section class="hero3"><h1>Делаем IT,<br>которое <span class="o">работает</span></h1><p class="lead">Сайты, приложения и веб-сервисы под ключ: от идеи до запуска и поддержки.</p><div class="cta2"><a class="pill glass" href="#svc">Выбрать услугу</a><a class="ghost" href="#contact">Обсудить проект →</a></div></section>
+<div id="view-home"><section class="hero3"><h1>Делаем IT,<br>которое <span class="o">работает</span></h1><p class="lead">Сайты, приложения и веб-сервисы под ключ: от идеи до запуска и поддержки.</p><div class="cta2"><a class="pill glass" href="#svc">Выбрать услугу</a><a class="ghost" href="#contact">Обсудить проект →</a></div></section>
 <div class="stagewrap" id="svc"><div class="stage" id="stage"><div class="bg on" style="--c1:#9a9a9a;--c2:#1c1c1c"></div><div class="bg" style="--c1:#d6d6d6;--c2:#262626"></div><div class="bg" style="--c1:#6e6e6e;--c2:#161616"></div><div class="row" id="row"><div class="it on"><div class="ic" style="--c1:#9a9a9a"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 21h10M12 18v3"/></svg></div><span class="nm">Сайт</span></div><div class="it"><div class="ic" style="--c1:#d6d6d6"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div><span class="nm">Приложение</span></div><div class="it"><div class="ic" style="--c1:#6e6e6e"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><span class="nm">Веб-приложение</span></div></div></div>
 <div class="hint"><svg class="ico-inline" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> свайп или стрелки для выбора <svg class="ico-inline" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div><div class="detail frost" id="dt"></div></div>
 <main class="wrap">
@@ -404,12 +412,26 @@ body{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
 <div class="mq"><div><span>САЙТЫ</span><span>ПРИЛОЖЕНИЯ</span><span>ВЕБ-СЕРВИСЫ</span><span>САЙТЫ</span><span>ПРИЛОЖЕНИЯ</span><span>ВЕБ-СЕРВИСЫ</span></div></div>
 <main class="wrap" id="contact"><div class="ct"><div class="rv"><h2 class="h2" style="margin-top:0" data-n="04 — Контакты">Начнём<br>проект?</h2><a class="ml" href="mailto:keep.it.official.001@gmail.com">keep.it.official.001@gmail.com</a></div>
 <form class="frost rv fm" id="f"><input name="n" placeholder="Имя" required><input name="e" type="email" placeholder="Email" required><textarea name="m" rows="4" placeholder="Расскажите о проекте" required minlength="5"></textarea><button class="send" type="submit">Отправить заявку</button></form></div>
-<div id="main-site"></div>
+<div class="ft2"><div class="big2">KEEP</div><div class="fr"><span>© 2026 KEEP</span><a href="mailto:keep.it.official.001@gmail.com">keep.it.official.001@gmail.com</a></div></div></main></div>
 <div class="page" id="page-cabinet"></div>
 <div class="page" id="page-order"></div>
 <div class="page" id="page-admin"></div>
 <div id="md"></div><div id="tt" class="toast"></div>
-<div class="ft2"><div class="big2">KEEP</div><div class="fr"><span>© 2026 KEEP</span><a href="mailto:keep.it.official.001@gmail.com">keep.it.official.001@gmail.com</a></div></div></main>
+<nav class="bnav hide" id="bnav" aria-label="Навигация">
+  <button type="button" data-nav="/" class="on" aria-label="Главная">
+    <svg class="ico-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 01-1 1h-5v-6H10v6H5a1 1 0 01-1-1v-9.5z"/></svg>
+    <span>Главная</span>
+  </button>
+  <button type="button" data-nav="/cabinet?tab=orders" aria-label="Мои заказы">
+    <span class="dot"></span>
+    <svg class="ico-orders" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    <span>Мои заказы</span>
+  </button>
+  <button type="button" data-nav="/cabinet" aria-label="Кабинет">
+    <svg class="ico-cab" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.5 3.6-6 8-6s8 2.5 8 6"/></svg>
+    <span>Кабинет</span>
+  </button>
+</nav>
 <script>
 const DT=[
 {n:"Сайт",t:"7–21 день",l:"Создаём сайты, которые быстро загружаются, хорошо выглядят на любом экране и приводят клиентов. Подходят для презентации бизнеса, продаж и сбора заявок.",p:[["Уникальный дизайн","Интерфейс под ваш бренд, а не шаблон"],["Адаптивная вёрстка","Телефон, планшет и компьютер"],["SEO и скорость","Быстрая загрузка и видимость в поиске"],["Формы и аналитика","Заявки, метрики, подключение домена"],["Управление контентом","Простая панель для правок без программиста"],["Безопасность","HTTPS, защита форм и резервные копии"]],k:["HTML","CSS","JavaScript","React","WordPress"]},
@@ -421,18 +443,27 @@ const THINK_PHRASES=[
   ['Смотрю сценарии пользователей…','Сверяю платформы iOS и Android…','Считаю объём экранов…','Готовлю описание приложения…'],
   ['Проектирую роли и доступ…','Думаю над масштабированием…','Подбираю архитектуру API…','Собираю описание веб-сервиса…']
 ];
-function renderFinal(i){const d=DT[i];document.getElementById('dt').innerHTML='<div class="dbody"><div class="dtop"><h3>'+d.n+'</h3><span class="b2">Срок: '+d.t+'</span></div><p class="ld">'+d.l+'</p><h4>Что входит</h4><div class="fc">'+d.p.map((x,k)=>'<div class="fi2" style="--i:'+k+'"><span class="ck">'+CK+'</span><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div></div>').join('')+'</div><h4 style="margin-top:30px">Технологии</h4><div class="chips">'+d.k.map(x=>'<span>'+x+'</span>').join('')+'</div><div class="dfoot"><button data-s="'+d.n+'">Заказать: '+d.n+'</button><small>Стоимость рассчитаем бесплатно после обсуждения</small></div></div>'}
+function finalHtml(i){const d=DT[i];return '<div class="dbody"><div class="dtop"><h3>'+d.n+'</h3><span class="b2">Срок: '+d.t+'</span></div><p class="ld">'+d.l+'</p><h4>Что входит</h4><div class="fc">'+d.p.map((x,k)=>'<div class="fi2" style="--i:'+k+'"><span class="ck">'+CK+'</span><div><b>'+x[0]+'</b><span>'+x[1]+'</span></div></div>').join('')+'</div><h4 style="margin-top:30px">Технологии</h4><div class="chips">'+d.k.map(x=>'<span>'+x+'</span>').join('')+'</div><div class="dfoot"><button data-s="'+d.n+'">Заказать: '+d.n+'</button><small>Стоимость рассчитаем бесплатно после обсуждения</small></div></div>'}
+function swapDt(html){
+  const box=document.getElementById('dt'),k=swapDt._k=(swapDt._k||0)+1;
+  box.style.height=box.offsetHeight+'px';box.style.overflow='hidden';box.classList.add('sw');
+  setTimeout(()=>{
+    if(k!==swapDt._k)return;
+    box.innerHTML=html;box.classList.remove('sw');
+    box.style.height=(box.scrollHeight+box.offsetHeight-box.clientHeight)+'px';
+    clearTimeout(swapDt._t);swapDt._t=setTimeout(()=>{box.style.height='';box.style.overflow=''},480);
+  },swapDt._k===1?0:200);
+}
 function render(i){
-  const phrases=THINK_PHRASES[i]||THINK_PHRASES[0];
-  const box=document.getElementById('dt');
-  let step=0;
-  box.innerHTML='<div class="think-box"><div class="think-ico"></div><div class="think-txt">'+phrases[0]+'</div></div>';
-  clearInterval(render._t);
+  const phrases=THINK_PHRASES[i]||THINK_PHRASES[0],box=document.getElementById('dt');
+  let step=0;clearInterval(render._t);
+  swapDt('<div class="think-box"><div class="think-ico"></div><div class="think-txt">'+phrases[0]+'</div></div>');
   render._t=setInterval(()=>{
     step++;
-    if(step>=phrases.length){clearInterval(render._t);renderFinal(i);return}
-    const t=box.querySelector('.think-txt');if(t)t.textContent=phrases[step];
-  },450);
+    if(step>=phrases.length){clearInterval(render._t);swapDt(finalHtml(i));return}
+    const t=box.querySelector('.think-txt');
+    if(t){t.classList.add('o');setTimeout(()=>{t.textContent=phrases[step];t.classList.remove('o')},180)}
+  },750);
 }
 /* ===== аккаунты, заявки, кабинет ===== */
 const SV=['Сайт','Приложение','Веб-приложение','Другое'];
@@ -481,7 +512,7 @@ function route(){
   if(path==='/admin'){renderAdminPage();return}
 }
 function goPage(path){history.pushState({},'',path);route()}
-addEventListener('popstate',route);
+addEventListener('popstate',()=>route());
 
 function modal(h){const m=$('#md');m.innerHTML='<div class="sheet frost"><button class="x" type="button" aria-label="Закрыть">×</button>'+h+'</div>';m.classList.add('on');document.body.style.overflow='hidden';const f=m.querySelector('input,textarea');f&&setTimeout(()=>f.focus({preventScroll:true}),60)}
 function closeM(){$('#md').classList.remove('on');document.body.style.overflow=''}
@@ -492,7 +523,7 @@ function authBtn(){
   const b=$('#au');if(!b)return;
   let html=ME?'<span class="av">'+esc(ME.name[0].toUpperCase())+'</span>'+esc(ME.name.split(' ')[0]):'Войти';
   if(ME&&NOTIF>0)html+='<span class="badge-n">'+NOTIF+'</span>';
-  b.innerHTML=html;
+  b.innerHTML=html;syncNav();
   const f=$('#f');if(ME&&f){if(f.elements.n&&!f.elements.n.value)f.elements.n.value=ME.name;if(f.elements.e&&!f.elements.e.value)f.elements.e.value=ME.email}
 }
 async function refreshNotif(){
@@ -709,6 +740,7 @@ if(formF)formF.addEventListener('submit',async e=>{e.preventDefault();const f=e.
 
 
 function syncNav(){
+  const nv=$('#bnav');if(nv)nv.classList.toggle('hide',!ME);document.body.classList.toggle('hasnav',!!ME);
   const path=location.pathname.replace(/\/$/,'')||'/';
   const tab=new URLSearchParams(location.search).get('tab');
   $$('#bnav button').forEach(b=>{
@@ -728,8 +760,14 @@ function syncNav(){
   const ob=$('#bnav button[data-nav="/cabinet?tab=orders"]');
   if(ob) ob.classList.toggle('has', NOTIF>0);
 }
-const _route=route;
-route=function(){ _route(); syncNav(); };
+const _route=route;let _first=1,_rt;
+route=function(){
+  const vis=$('.page.on')||(document.body.classList.contains('on-page')?null:$('#view-home'));
+  clearTimeout(_rt);
+  const go=()=>{if(vis)vis.classList.remove('out');_route();scrollTo(0,0);syncNav()};
+  if(vis&&!_first){vis.classList.add('out');_rt=setTimeout(go,200)}else go();
+  _first=0;
+};
 $$('#bnav button').forEach(b=>b.onclick=()=>{
   const n=b.getAttribute('data-nav');
   if(n==='/'){ goPage('/'); return; }
@@ -791,21 +829,6 @@ document.querySelectorAll('.glass').forEach(g=>g.addEventListener('pointermove',
 (()=>{const pg=document.getElementById('pg'),tp=document.querySelector('.top');function u(){const m=document.documentElement.scrollHeight-innerHeight;pg.style.transform='scaleX('+(m>0?scrollY/m:0)+')';tp.classList.toggle('sc',scrollY>20)}addEventListener('scroll',u,{passive:true});u()})();
 </script>
 
-<nav class="bnav" id="bnav" aria-label="Навигация">
-  <button type="button" data-nav="/" class="on" aria-label="Главная">
-    <svg class="ico-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 01-1 1h-5v-6H10v6H5a1 1 0 01-1-1v-9.5z"/></svg>
-    <span>Главная</span>
-  </button>
-  <button type="button" data-nav="/cabinet?tab=orders" aria-label="Мои заказы">
-    <span class="dot"></span>
-    <svg class="ico-orders" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-    <span>Мои заказы</span>
-  </button>
-  <button type="button" data-nav="/cabinet" aria-label="Кабинет">
-    <svg class="ico-cab" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.5 3.6-6 8-6s8 2.5 8 6"/></svg>
-    <span>Кабинет</span>
-  </button>
-</nav>
 
 </body>
 </html>
