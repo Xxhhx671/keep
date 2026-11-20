@@ -1,0 +1,9 @@
+{
+  "name": "keep-site",
+  "version": "1.0.0",
+  "description": "KEEP — IT-услуги: один сервер, встроенная база data/db.json",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^4.19.2" }
+}
